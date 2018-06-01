@@ -17,10 +17,12 @@ import com.facebook.stetho.Stetho;
  */
 public class TwitterApp extends Application {
 
+    private static Context context;
     MyDatabase myDatabase;
 
     @Override
     public void onCreate() {
+
         super.onCreate();
         // when upgrading versions, kill the original tables by using
 		// fallbackToDestructiveMigration()
@@ -29,9 +31,10 @@ public class TwitterApp extends Application {
 
         // use chrome://inspect to inspect your SQL database
         Stetho.initializeWithDefaults(this);
+        TwitterApp.context = this;
     }
 
-    public static TwitterClient getRestClient(Context context) {
+    public static TwitterClient getRestClient() {
         return (TwitterClient) TwitterClient.getInstance(TwitterClient.class, context);
     }
 
