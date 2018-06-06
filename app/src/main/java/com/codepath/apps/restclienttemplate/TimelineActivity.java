@@ -28,6 +28,7 @@ public class TimelineActivity extends AppCompatActivity {
     private TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
+    private final int REQUEST_CODE = 20;
 
 
 
@@ -52,7 +53,8 @@ public class TimelineActivity extends AppCompatActivity {
     public void launchComposeView() {
         // first parameter is the context, second is the class of the activity to launch
         Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
-        startActivity(i); // brings up the second activity
+//        startActivity(i); // brings up the second activity
+        startActivityForResult(i, REQUEST_CODE);
     }
 
     @Override

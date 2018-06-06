@@ -13,6 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="23dp"
+        android:layout_margin="20dp"
         android:background="#cae5f0"
         android:ems="10"
         android:inputType="textMultiLine" />
