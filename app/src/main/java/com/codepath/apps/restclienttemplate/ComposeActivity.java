@@ -7,15 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.parceler.Parcels;
-
-import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -46,20 +44,24 @@ public class ComposeActivity extends AppCompatActivity {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);
 
-                        Tweet Tweet = null;
+                        Tweet tweet = null;
                         try {
-                            Tweet = Tweet.fromJSON(response);
+                            tweet = Tweet.fromJSON(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
 
-                        Intent i = new Intent();
-                        i.putExtra("Tweet", Parcels.wrap(List.class, Tweet));
-                        setResult(COMPOSE_RESULT_CODE, i);
-                        finish();
-
-//                        finishActivity(20);
+                        if (etText.length() > 140) {
+                            String s = "Your string is " + (etText.length()-140) + " characters long!";
+                            Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Intent i = new Intent();
+                            i.putExtra("Tweet", tweet);
+                            setResult(COMPOSE_RESULT_CODE, i);
+                            finish();
+                        }
                     }
 
                     @Override

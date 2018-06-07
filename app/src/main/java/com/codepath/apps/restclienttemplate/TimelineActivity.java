@@ -120,4 +120,15 @@ public class TimelineActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Tweet tweet = (Tweet) data.getParcelableExtra("tweet");
+        tweets.add(0, tweet);
+        tweetAdapter.notifyItemInserted(0);
+        rvTweets.scrollToPosition(0);
+
+    }
 }
