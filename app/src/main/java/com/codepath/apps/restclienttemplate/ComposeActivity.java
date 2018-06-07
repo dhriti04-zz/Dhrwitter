@@ -53,10 +53,10 @@ public class ComposeActivity extends AppCompatActivity {
 
 
                         if (etText.length() > 140) {
-                            String s = "Your string is " + (etText.length()-140) + " characters long!";
+                            String s = "Your tweet is " + (etText.length()-140) + " characters longer than required!";
                             Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
                         }
-                        else {
+                        else if (etText.length() <= 140) {
                             Intent i = new Intent();
                             i.putExtra("Tweet", tweet);
                             setResult(COMPOSE_RESULT_CODE, i);
