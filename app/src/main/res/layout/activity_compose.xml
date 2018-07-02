@@ -12,11 +12,15 @@
         android:layout_height="153dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
-        android:layout_margin="20dp"
+        android:layout_marginTop="22dp"
         android:background="#cae5f0"
         android:ems="10"
-        android:inputType="textMultiLine" />
+        android:gravity="top"
+        android:hint="Enter new tweet here ..."
+        android:inputType="textMultiLine"
+        android:padding="7dp"
+        android:textAlignment="viewStart"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/btnTweet"
@@ -28,4 +32,14 @@
         android:background="@color/Twitter"
         android:textColor="@color/white"
         android:text="Tweet" />
+
+    <TextView
+        android:id="@+id/tvChars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="149dp"
+        android:text="Characters" />
 </RelativeLayout>

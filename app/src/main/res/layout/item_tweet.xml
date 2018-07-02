@@ -39,7 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/tvTwitterName"
@@ -49,4 +50,13 @@
         android:layout_below="@+id/tvUserName"
         android:textColor="@color/Twitter"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/TvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tvTime"
+        android:text="TextView"
+        android:textSize="12sp" />
 </RelativeLayout>
