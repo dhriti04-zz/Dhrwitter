@@ -30,9 +30,6 @@ public class ComposeActivity extends AppCompatActivity {
     TextWatcher tw;
     Boolean isLong;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +53,18 @@ public class ComposeActivity extends AppCompatActivity {
                     String str = "Your tweet is " + (etText.length()-140) + " characters longer than required!";
                     Toast.makeText(getApplicationContext(), str, Toast.LENGTH_LONG).show();
                     isLong = true;
+                    btnTweet.setEnabled(false);
+                    btnTweet.setBackgroundColor(getResources().getColor(R.color.button_disabled));
                 }
                 else {
                     String str = (140- etText.length()) + "";
                     tvChars.setText(str);
 //                    Toast.makeText(getApplicationContext(), str, Toast.LENGTH_LONG).show();
                     isLong = false;
+                    btnTweet.setEnabled(true);
+                    btnTweet.setBackgroundColor(getResources().getColor(R.color.Twitter));
+
+
                 }
             }
 
@@ -77,22 +80,27 @@ public class ComposeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!isLong) {
+
                     client.sendTweet(etText.getText().toString(), new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             super.onSuccess(statusCode, headers, response);
 
-                            Tweet tweet = null;
-                            try {
-                                tweet = Tweet.fromJSON(response);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                            if (!isLong) {
+                                Tweet tweet = null;
+                                try {
+                                    tweet = Tweet.fromJSON(response);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                                 Intent i = new Intent();
                                 i.putExtra("Tweet", tweet);
                                 setResult(COMPOSE_RESULT_CODE, i);
                                 finish();
+                            }
+                            else {
+                                System.out.println("uhm no too long dude");
+                            }
                         }
 
                         @Override
@@ -101,17 +109,9 @@ public class ComposeActivity extends AppCompatActivity {
                             Log.d("TwitterClient", "not working?");
                         }
                     });
-                } else {
-                    System.out.println("too long dude");
-                }
+
             }
         });
     }
 
-
-
-    public void onSubmit(View v) {
-        // closes the activity and returns to first screen
-        finish();
-    }
 }
